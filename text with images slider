@@ -1,0 +1,407 @@
+{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .cstm_img-text__blocks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .content_block, .image_block {
+    width: 50%;
+}
+  .image_block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.content_block {
+    padding: 5% 8%;
+}
+  .sub_head, .description {
+    font-family: Inter;
+font-size: 19.06px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+margin:0;
+    color:#000;
+} 
+  .main_head {
+    font-family: Inter;
+font-size: 43.13px;
+font-weight: 700;
+line-height: 55px;
+text-align: left;
+margin-top:0;
+}
+  .cstm_img-text__blocks ul {
+    padding: 0;
+}
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  .cstm_img-text__blocks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .content_block, .image_block {
+    width: 50%;
+}
+  .image_block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  .points_icons {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+
+  .points_icons img {
+    height: 20px;
+    width: 20px;
+}
+  .points_icons .description {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+    gap: 10px;
+}
+  .cstm_img-text__blocks a {
+    font-size: 20px;
+    padding: 1.5rem 3rem;
+    text-transform: uppercase;
+    font-weight: 500;
+        background: #6DD5A7FF;
+    color:#000;
+}
+  .cstm_img-text__blocks a.button:after {
+   content: none!important;
+}
+  .mob_reviews_block {
+    display:none;
+  }
+ 
+  @media screen and (max-width: 550px) {
+    .cstm_img-text__blocks .content_block {
+    text-align: center;
+              text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+    }
+      .main_head {
+
+font-size: 24px;
+font-weight: 700;
+line-height: 40px;
+text-align: center;
+
+}
+  }
+  @media screen and (max-width: 750px) {
+    .cstm_img-text__blocks .content_block {
+         text-align: center;
+        font-weight: bold;
+        color: #000;
+    }
+ .description {
+    font-size: 14px;
+    line-height: 26px;
+    text-align:center;
+      
+    }
+    .sub_head {
+         font-size: 14px;
+    line-height: 26px;
+    text-align:center;
+    font-weight:700;
+      letter-spacing:normal;
+      margin:0;
+      padding-top:15px;
+}
+    .main_head {
+            font-size: 24px;
+        margin-bottom: 0px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: normal;
+}
+    .cstm_img-text__blocks .button {
+    width: 100%;
+}
+        .cstm_img-text__blocks {
+            flex-direction: column-reverse;
+}
+      .content_block, .image_block {
+    width: 100%;
+}
+    .cstm_img-text_slide .rich-text__wrapper {
+    width: 100%;
+}
+    /* .points_icons {
+    display: none;
+} */
+      .mob_reviews_block {
+        display: flex;
+        justify-content: center;
+        margin: 15px 0;
+        gap: 5px;
+  }
+    .content_block {
+    padding: 5% !important;
+}
+    .image_block img {
+    height: 40vh;
+}
+     .points_icons .description {
+    text-align:left;
+}
+  }
+{%- endstyle -%}
+
+<div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
+  <div class="rich-text cstm_img-text_slide color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
+    <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}">
+      <div class="cstm_img-text__blocks {{ section.settings.content_alignment }}">
+        <div class="content_block">
+          <h4 class="sub_head">{{ section.settings.sub_heading }}</h4>
+          <h3 class="main_head">{{ section.settings.heading }}</h3>
+          <div class="points_icons">
+          <span class="description">
+            {% if section.settings.point_img != null %} <img src="{{ section.settings.point_img | img_url:'master' }}"> {% endif %}  {{ section.settings.point_1 }}</span>
+          <span class="description">{% if section.settings.point_img != null %}<img src="{{ section.settings.point_img | img_url:'master' }}"> {% endif %}  {{ section.settings.point_2 }}</span>
+          <span class="description">{% if section.settings.point_img != null %}<img src="{{ section.settings.point_img | img_url:'master' }}"> {% endif %}  {{ section.settings.point_3 }}</span>
+          </div>
+          {% if section.settings.btn_url != null %}
+          <a href="{{ section.settings.btn_url }}" class="button button--primary">{{ section.settings.btn_label }}</a>
+          {% endif %}
+          <div class="mob_reviews_block">
+            {% if section.settings.rev_img != null %} <img src="{{ section.settings.rev_img | img_url:'master' }}"> {% endif %} <span>{{ section.settings.cstmr_count_1 }}</span>{{ section.settings.cstmr_count_2 }}
+          </div>
+        </div>
+        <div class="image_block splide custom-slide-1">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'image' -%}
+                    <li class="splide__slide">
+                      <img src="{{ block.settings.slide_img | img_url:'master' }}">
+                    </li>
+                {%- endcase -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener( 'DOMContentLoaded', function () {
+    new Splide( '.splide', {
+      type   : 'loop',
+      perPage: 1,
+      autoplay: true,
+    } ).mount();
+  } );
+</script>
+
+
+{% schema %}
+{
+  "name": "Custom Text-Image Slider",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "sub_heading",
+      "default":"#1 WATER FILTER FOR SKIN",
+      "label": "Sub Heading"
+    },
+        {
+      "type": "text",
+      "id": "heading",
+      "default":"#1 WATER FILTER FOR SKIN",
+      "label": "Heading"
+    },
+            
+        {
+      "type": "image_picker",
+      "id": "point_img",
+      "label": "Ponits left side image"
+    },
+    {
+      "type": "text",
+      "id": "point_1",
+      "default":"Acheve soft, glowing, clear skin",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "point_2",
+      "default":"Acheve soft, glowing, clear skin",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "point_3",
+      "default":"Acheve soft, glowing, clear skin",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "default":"Shop Now",
+      "label": "Button Label"
+    },
+        {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "rev_img",
+      "label": "Reviews image"
+    },
+    {
+      "type": "text",
+      "id": "cstmr_count_1",
+      "default":"4.9 | 5",
+      "label": "Customers count"
+    },
+        {
+      "type": "text",
+      "id": "cstmr_count_2",
+      "default":"200k+ CUSTOMERS",
+      "label": "Customers count Last"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.desktop_content_position.label",
+      "info": "t:sections.rich-text.settings.desktop_content_position.info"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.content_alignment.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "image",
+      "limit": 3,
+      "settings": [
+{
+  "type": "image_picker",
+  "id": "slide_img",
+  "label": "Sliding Image"
+}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Text-Image Slider",
+      "blocks": [
+        
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
