@@ -1,0 +1,106 @@
+<div class="marquee-container">
+  <div class="marquee-scroller">
+    {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+        <div class="image-container">
+          <div class="mar-imgs">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <!-- Duplicate the set of images for a seamless loop -->
+    {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+        <div class="image-container">
+          <div class="mar-imgs">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<style>
+    .marquee-container {
+      overflow-x: hidden;
+      width: 100%;
+      padding: 20px 0;
+    }
+    .marquee-scroller {
+      display: flex;
+      align-items: center;
+      gap: 20px; /* Adjust the gap between images */
+      width: max-content;
+      animation: marquee 20s linear infinite; /* Set a duration that suits the number of images */
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); } /* Adjust to ensure seamless scroll */
+    }
+    .mar-imgs {
+    width: 150px;
+        height: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mar-imgs img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* Ensures the image fits within the container without distortion */
+    }
+    .image-container {
+        display: flex;
+        align-items: center;
+        width: 250px;
+    }
+    @media screen and (max-width: 992px) {
+      .marquee-scroller {
+        gap: 10px; /* Adjust the gap for smaller screens */
+      }
+      .mar-imgs {
+        width: 100px; /* Adjust width for smaller screens */
+        height: 100px; /* Adjust height for smaller screens */
+      }
+    }
+      @media screen and (max-width: 768px) {
+      .mar-imgs {
+        width: auto; /* Adjust width for smaller screens */
+        height: 42px; /* Adjust height for smaller screens */
+      }
+        .image-container {
+      display: flex;
+      align-items: center;
+      width: 145px;
+      justify-content: center;
+  }
+        .marquee-container {
+          padding: 0;
+        }
+    }
+</style>
+{% schema %}
+{
+  "name": "marquee scroll",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "marquee scroll"
+    }
+  ]
+}
+{% endschema %}
