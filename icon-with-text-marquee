@@ -1,0 +1,225 @@
+<div class="BW-marquee-main" style="background: {{ section.settings.background_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+<div class="BW-marquee-flex">
+      <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+
+  <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+
+  <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+
+  <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+
+  <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+
+  <div class="BW-marquee-block">
+        {% if section.settings.main_image != blank %}
+        <div class="BW-marquee-block-img">
+            {{ section.settings.main_image | image_url: width: 1500 | image_tag }}
+        </div>
+          {% else %} {% endif %}
+        <div class="loop-text"><p>{{ section.settings.text1 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text2 }}</p><img src="https://cdn.shopify.com/s/files/1/0662/7642/5913/files/Ellipse_13.svg?v=1721831459" alt="dot" width="8" height="8"></div>
+
+        <div class="loop-text"><p>{{ section.settings.text3 }}</p></div>
+      </div>
+</div>
+</div>
+
+<style>
+.BW-marquee-flex {
+        display: flex;
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        font-family: sans-serif;
+     }
+
+     .BW-marquee-block {
+         animation: loopText 5s infinite linear;      
+    }
+
+    @keyframes loopText {
+       from {
+           transform: translateX(0);
+        }
+
+       to {
+           transform: translateX(-100%);
+        }
+
+    }
+
+
+  .BW-marquee-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BW-marquee-flex {
+  display: flex;
+  align-items: center;
+}
+
+.BW-marquee-block {
+  display: flex;
+  align-items: center;
+  margin: 0 10px; /* Adjust spacing as needed */
+}
+
+.loop-text p {
+  margin: 0; /* Remove default paragraph margins */
+}
+
+.dot {
+  display: inline-block;
+  margin: 0 5px; /* Adjust spacing around the dot as needed */
+}
+
+  .loop-text {
+    padding: 0 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+  .loop-text p {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: -0.25px;
+    color: #FFFCEA;
+}
+
+  .BW-marquee-block-img {
+    width: 25px;
+    height: 25px;
+    margin-right: 30px;
+}
+
+  .BW-marquee-block-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+  .loop-text img {
+    margin-right: 30px;
+}
+  </style>
+
+{% schema %}
+{
+  "name": "BW-Marquee",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+  "type": "image_picker",
+  "id": "main_image",
+  "label": "Image"
+},
+
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Text 1"
+      },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Text 2"
+      },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Text 3"
+      },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BW-Marquee",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}
