@@ -1,3 +1,6 @@
+{% comment %} This will be the preview of the section - copy and see the url
+https://tinyurl.com/29bjx7bb
+ {% endcomment %}
 <div class="section-{{ section.id }}-padding {% unless section.settings.full_width %} page-width{% endunless %} reviews-section">
   <div class="tabbed-section color-{{ section.settings.color_scheme }}">
     <h3 class="section-title reviews-section">
