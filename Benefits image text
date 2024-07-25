@@ -1,0 +1,132 @@
+{% comment %}  https://tinyurl.com/2bdm65bx {% endcomment %}
+<style>
+  .benefits-section {
+    padding: 40px 20px;
+  }
+  .benefits-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .benefits-section h2 {
+    font-size: 35px;
+    font-weight:700;
+    text-align:left;
+    margin-bottom: 20px;
+  }
+  .benefits-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+.benefit-item {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    width: calc(50% - 10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.benefit-item img {
+    width: 16vh;
+    height: 8vw;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.benefit-item p {
+    font-size: 18px;
+    text-align: left;
+  color:#000;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0 15px;
+}
+  @media (max-width: 767px) {
+    .benefit-item {
+      width: 100%; /* Adjust the width for mobile view */
+    }
+    .benefit-item img {
+    height: 12vh;
+    width: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+      .benefits-section h2 {
+    font-size: 18px;
+    text-align:center;
+  }
+    .benefit-item p {
+    font-size: 12px;
+    padding: 15px 10px !important;
+}
+  }
+</style>
+
+
+
+
+
+
+<section class="benefits-section" style="background-color: {{ section.settings.background_color }}">
+  <div class="container">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="benefits-grid">
+      {% for block in section.blocks %}
+        <div class="benefit-item">
+          <img src="{{ block.settings.image | img_url: '300x300' }}" alt="Benefit Image">
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Benefits image text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "How Adding Filterbaby Helps:"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Increases Hydration: Decrease in chlorine = supple, hydrated skin."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits image text",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
