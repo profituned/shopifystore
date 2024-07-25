@@ -1,0 +1,336 @@
+<!-- Product Slider Section
+https://anchorball.ai/ -->
+
+<!-- Include SplideJS from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+<div
+  class="AB-prod-slider-main"
+  style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;"
+>
+  <div class="page-width">
+    <div class="AB-prod-slider-heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="AB-prod-slider-splide splide">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {% for block in section.blocks %}
+            {% assign product = all_products[block.settings.product] %}
+            {% if product != blank %}
+              <li class="splide__slide AB-prod-slider-item">
+                {% if product.featured_image != blank %}
+                  <a href="{{ block.settings.button_url }}">
+                    <div
+                      class="AB-prod-slider-product-image tiltcard"
+                      data-tilt
+                      data-tilt-glare
+                      style="background-color: {{ block.settings.bg_color }};"
+                    >
+                      {{ product.featured_image | image_url: width: 1500 | image_tag }}
+                    </div>
+                  </a>
+                {% else -%}
+                {%- endif %}
+                <div class="AB-prod-slider-product-button">
+                  <a href="{{ block.settings.button_url }}" class="AB-prod-slider-button">
+                    {{ block.settings.button_text }}
+
+                    <svg
+                      width="12"
+                      height="16"
+                      viewBox="0 0 16 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                          d="M15.1395 5.9962L12.0465 11.3652H6.08745L9.18145 5.9962L6.08745 0.627197H12.0465L15.1395 5.9962ZM2.99345 0.627197H0.711449L3.80445 5.9962L0.710449 11.3652H2.99345L6.08745 5.9962L2.99345 0.627197Z"
+                          fill="#000F37"></path>
+                    </svg>
+                  </a>
+                </div>
+                <div class="AB-prod-slider-product-title">
+                  <h3>{{ product.title }}</h3>
+                </div>
+                <div class="AB-prod-slider-product-price">
+                  From <span>{{ product.price | money }}</span>
+                </div>
+              </li>
+            {% else %}
+
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none">
+            <rect width="36" height="37" x="1" y=".5" fill="#000" rx="18"></rect>
+            <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M19.95 11.95 27 19l-7.05 7.05M27 19H12"></path>
+            <rect width="36" height="37" x="1" y=".5" stroke="#000" rx="18"></rect>
+          </svg>
+        </button>
+        <button class="splide__arrow splide__arrow--next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none">
+            <rect width="36" height="37" x="1" y=".5" fill="#000" rx="18"></rect>
+            <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M19.95 11.95 27 19l-7.05 7.05M27 19H12"></path>
+            <rect width="36" height="37" x="1" y=".5" stroke="#000" rx="18"></rect>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var sectionSettings = {{ section.settings | json
+    }};
+    var splide = new Splide('.splide', {
+        type: 'slide',
+        dots: 'false',
+        lazyLoad: 'nearby',
+        gap: '10px',
+        pagination: false,
+        perPage: sectionSettings.desktop_columns,
+        breakpoints: {
+            1024: {
+                perPage: sectionSettings.tablet_columns,
+            },
+            600: {
+                perPage: sectionSettings.mobile_columns,
+                pagination: true,
+            }
+        }
+    });
+    splide.mount();
+  });
+</script>
+
+<style>
+    /* Section Title */
+    .AB-prod-slider-heading h2 {
+        font-size: 40px;
+        text-align: center;
+        font-weight: 500;
+        font-family: GothamHTF-ultra;
+        color: #0F0631;
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+
+    /* Product Title */
+    .AB-prod-slider-product-title h3 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-family: GothamHTF-ultra;
+        color: #0F0631;
+        padding-top: 16px;
+        max-width: 340px;
+        margin: auto;
+    }
+
+    /* Product Price */
+    .AB-prod-slider-product-price {
+        margin: 0;
+        font-weight: 500;
+        font-size: 16px;
+        font-family: GOthamHTF-ultra;
+        text-align: center;
+    }
+
+    .AB-prod-slider-product-price span {
+        color: #DF4A6A;
+    }
+
+    /* Button */
+    .AB-prod-slider-button {
+        text-decoration: none;
+        font-weight: 500;
+        border: 1px solid #ffa500 !important;
+        font-size: 16px;
+        background: #ffa500 !important;
+        border: 2px solid #0f0631;
+        height: 50px;
+        padding: 0 16px;
+        border-radius: 99px;
+        color: #0f0631 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 240px;
+        left: 50%;
+        font-weight: 700;
+        bottom: 0;
+        margin: auto;
+        margin-top: 20px;
+        transition: all 0.5s;
+        text-transform: uppercase;
+        font-family: 'GothamHTF-bold';
+    }
+
+    a.AB-prod-slider-button svg {
+        margin-left: 5px;
+    }
+
+    /* Slides */
+
+
+    /* Featured Image */
+    .AB-prod-slider-product-image {
+        padding: 30px;
+    }
+
+    .AB-prod-slider-product-image {
+        width: 100%;
+        height: 530px;
+    }
+
+    .AB-prod-slider-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Splide Arrow */
+    .AB-prod-slider-main .splide__arrow {
+        background: grey;
+        width: 40px;
+        height: 40px;
+        top: 40%;
+    }
+
+    .AB-prod-slider-main .splide__arrow svg {
+        fill: none !important;
+        height: auto !important;
+        width: auto !important;
+    }
+
+    .AB-prod-slider-main .splide__arrow--prev {
+        left: 10px;
+        opacity: 1;
+    }
+
+    .AB-prod-slider-main .splide__arrow--next {
+      right: 10px;
+      opacity: 1;
+  }
+
+    .splide__arrow:disabled {
+    opacity: .3;
+    opacity: 0;
+  }
+
+
+    .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--dot-default-color, #ffcdc2);
+        margin-right: 1px;
+    }
+
+    .splide__pagination__page.is-active {
+        background: #000;
+    }
+
+    .splide__pagination {
+        bottom: -1.5em;
+    }
+</style>
+
+{% schema %}
+{
+  "name": "AB Product Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading"
+    },
+    {
+      "type": "range",
+      "id": "desktop_columns",
+      "label": "Number of Products on Desktop",
+      "min": 1,
+      "max": 6,
+      "default": 4,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "tablet_columns",
+      "label": "Number of Products on Tablet",
+      "min": 1,
+      "max": 4,
+      "default": 2,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Number of Products on Mobile",
+      "min": 1,
+      "max": 3,
+      "default": 1,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top Padding",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom Padding",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Block",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select a product"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AB Product Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
