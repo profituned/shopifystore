@@ -1,0 +1,447 @@
+<div class="section-{{ section.id }}-padding {% unless section.settings.full_width %} page-width{% endunless %} reviews-section">
+  <div class="tabbed-section color-{{ section.settings.color_scheme }}">
+    <h3 class="section-title reviews-section">
+      {{ section.settings.section_title }}
+      <span>{{ section.settings.section_clr_title }}</span> {{ section.settings.section_title_last }}
+    </h3>
+    <ul class="tabs">
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' %}
+          <li class="tab">
+            <a href="#tab-{{ forloop.index }}">
+              {{ block.settings.tab_title }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    {% for block in section.blocks %}
+      {% if block.type == 'tab' %}
+        <div id="tab-{{ forloop.index }}" class="tab-content">
+          <div class="images-with-text">
+            {% if block.settings.img_item_1 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_1 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_1 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_1 }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.img_item_2 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_2 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_2 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_2 }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.img_item_3 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_3 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_3 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_3 }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.img_item_4 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_4 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_4 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_4 }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.img_item_5 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_5 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_5 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_5 }}</p>
+              </div>
+            {% endif %}
+
+            {% if block.settings.img_item_6 != null %}
+              <div class="image-with-text">
+                <img src="{{ block.settings.img_item_6 | img_url: 'master' }}" alt="">
+                <h3>{{ block.settings.text_item_6 }}</h3>
+                <p class="item_description">{{ block.settings.desc_item_6 }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+                  .section-{{ section.id }}-padding {
+                  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+                  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+                }
+
+
+                  @media screen and (min-width: 750px) {
+                  .section-{{ section.id }}-padding {
+                    padding-top: {{ section.settings.padding_top }}px;
+                    padding-bottom: {{ section.settings.padding_bottom }}px;
+                  }
+                }
+
+              .tabbed-section {
+                width: 100%;
+              }
+  .tabbed-section .images-with-text h3{
+   font-family: Inter;
+font-size: 25.16px;
+font-weight: 400;
+line-height: 36.96px;
+text-align: left;
+
+  }
+              .tabs {
+                  list-style: none;
+                  padding: 0;
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  gap: 20px;
+                  margin: 0 0 20px 0;
+              }
+              .tab {
+                margin: 0;
+              }
+              .tab a {
+                  text-decoration: none;
+                  padding: 10px 20px;
+                  display: block;
+                  color: #333;
+                  font-weight: bold;
+                  border: 1px solid;
+                  border-radius: 15px;
+                  font-weight: normal;
+              }
+              .tab a:hover, .tab a.active {
+                  background-color: #E8F4FF;
+              }
+              .tab-content {
+                display: none;
+              }
+              .tab-content.active {
+                display: block;
+              }
+              .images-with-text {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+              }
+              .tab-content .image-with-text {
+                width: calc(33.333% - 20px);
+                text-align: left;
+              }
+              .tab-content .image-with-text img {
+                max-width: 100%;
+                height: auto;
+                    aspect-ratio: 1.17;
+                border-radius: 10px;
+              }
+                tab-content .image-with-text h3 {
+                  font-size: 24px;
+                  line-height: 30px;
+              }
+              .tab-content .image-with-text p {
+                  margin: 10px 0 0 0;
+                  font-family: Inter;
+font-size: 18.15px;
+font-weight: 400;
+line-height: 26.88px;
+text-align: left;
+
+                color:#000;
+              }
+                .section-title.reviews-section {
+                  width: 50%;
+                  margin: 30px auto;
+                  font-size: 48px;
+                  text-align: center;
+              }
+              .reviews-section span {
+                  color: #fe5b38;
+              }
+                .custom-slide-1 .splide__arrow, .custom-slide-1 .splide__pagination {
+                   display: none; 
+              }
+        h3.section-title.reviews-section {
+          font-style: normal;
+      font-weight: bold;
+      font-size: 40.16px;
+      line-height: 54.92pxpx;
+      color: #000000;
+        }
+
+
+              @media screen and (max-width: 768px) {
+                .tab-content .image-with-text {
+                  width: calc(50% - 20px);
+                }
+                .section-title.reviews-section {
+                  width: 100%;
+                  font-size: 24px;
+              }
+
+                .tabs {
+                  flex-wrap: wrap;
+                  gap:5px;
+                  /* overflow-x: scroll;
+                  scrollbar-width: none; /* for Firefox */
+                  -ms-overflow-style: none;  /* for Internet Explorer and Edge */ */
+                }
+                .tab {
+                min-width: max-content;
+            }
+                h3.section-title.reviews-section {
+              margin-top: 40px;
+              margin-bottom: 20px;
+              font-size: 23.4px;
+              line-height: 32px;
+          }
+
+                .tab a {
+            font-size: 12px;
+            padding: 0px 8px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+        }
+
+  .reviews-section .images-with-text {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+      overflow-x: scroll;
+      scrollbar-width: none;  /* Hides the scrollbar in Firefox */
+  }
+               .reviews-section  .image-with-text {
+        width: 100%;
+        min-width: 80%;
+    }
+                
+              }
+              @media screen and (max-width: 480px) {
+               .tab-content .image-with-text {
+                  width: 100%;
+                }
+                .tab-content .image-with-text p {
+               
+font-size: 10.8px;
+font-weight: 400;
+line-height: 15.336px;
+
+
+                color:#000;
+              }
+               .tabbed-section .images-with-text h3{
+   
+font-size: 16.2px;
+font-weight: 400;
+line-height: 22.68px;
+                 margin-bottom: 0px;
+
+
+  }
+              }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.tab a');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', function (event) {
+        event.preventDefault();
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        contents.forEach((content) => content.classList.remove('active'));
+        contents[index].classList.add('active');
+      });
+    });
+
+    // Activate the first tab and content by default
+    if (tabs.length > 0) {
+      tabs[0].classList.add('active');
+      contents[0].classList.add('active');
+    }
+  });
+</script>
+{% schema %}
+{
+  "name": "Reviews Tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Over 200,000+ Customers Have"
+    },
+    {
+      "type": "text",
+      "id": "section_clr_title",
+      "label": "Section Color Title",
+      "default": "Transformed"
+    },
+    {
+      "type": "text",
+      "id": "section_title_last",
+      "label": "Section Title",
+      "default": "Their Skins"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.multirow.settings.container_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Tab Title"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title"
+        },
+        {
+          "type": "header",
+          "content": "Items Details"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_1",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_1",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_1",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_2",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_2",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_2",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_3",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_3",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_3",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_4",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_4",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_4",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_5",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_5",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_5",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_item_6",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text_item_6",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "desc_item_6",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Tabs"
+    }
+  ]
+}
+{% endschema %}
