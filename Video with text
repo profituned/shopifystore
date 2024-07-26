@@ -1,0 +1,165 @@
+{% comment %}  https://tinyurl.com/2bvpav3l  {% endcomment %}
+
+<div class="page-width">
+<div class="image-video-section">
+  <div class="video-text-content">
+    <h2>{{ section.settings.title }}</h2>
+    <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_text }}</a>
+  </div>
+  <div class="video-wrapper">
+    {% if section.settings.video_type == 'youtube' %}
+      {% assign video_id = section.settings.youtube_video_url | split: 'v=' | last %}
+      {% if video_id contains '&' %}
+        {% assign video_id = video_id | split: '&' | first %}
+      {% endif %}
+      {% if section.settings.youtube_video_url contains 'youtu.be' %}
+        {% assign video_id = section.settings.youtube_video_url | split: '/' | last | split: '?' | first %}
+      {% endif %}
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% else %}
+      <img src="{{ section.settings.video_thumbnail | img_url: 'master' }}" alt="Video Thumbnail">
+      <a href="{{ section.settings.video_link }}" class="video-play-button">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </a>
+    {% endif %}
+  </div>
+</div>
+</div>
+<style>
+.image-video-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;;
+}
+
+.video-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50%;
+    width: 50%;
+}
+
+.video-text-content h2 {
+font-size: 40px;
+    line-height: 50px;
+  font-weight:700;
+  margin-bottom: 10px;
+}
+
+.video-text-content .btn {
+  background-color: #76e1a6;
+      width: fit-content;
+    font-size: 14px;
+    line-height: 25px;
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 10px;
+  text-decoration: none;
+}
+
+.video-wrapper {
+    position: relative;
+    max-width: 50%;
+    width: 50%;
+}
+
+.video-wrapper img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  border-radius: 10px;
+}
+  @media(max-width:767px){
+    .image-video-section {
+    flex-direction: column-reverse;
+}
+    .video-text-content {
+    max-width: 100%;
+    width: auto;
+}
+    .video-wrapper {
+    max-width: 100%;
+    width: 100%;
+}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Video with text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Filterbaby 2.0"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get help with installation"
+    },
+    {
+      "type": "select",
+      "id": "video_type",
+      "label": "Video Type",
+      "default": "thumbnail",
+      "options": [
+        {
+          "value": "thumbnail",
+          "label": "Thumbnail with Link"
+        },
+        {
+          "value": "youtube",
+          "label": "YouTube Video"
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "youtube_video_url",
+      "label": "YouTube Video URL",
+      "info": "Enter the full YouTube video URL, e.g., 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' or 'https://youtu.be/dQw4w9WgXcQ'"
+    },
+    {
+      "type": "url",
+      "id": "video_link",
+      "label": "Video Link",
+      "info": "Used only if 'Thumbnail with Link' is selected"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail",
+      "label": "Video Thumbnail",
+      "info": "Used only if 'Thumbnail with Link' is selected"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video with text"
+    }
+  ]
+}
+{% endschema %}
