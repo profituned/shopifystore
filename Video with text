@@ -1,74 +1,106 @@
 {% comment %}  https://tinyurl.com/2bvpav3l  {% endcomment %}
 
-<div class="page-width">
-<div class="image-video-section">
-  <div class="video-text-content">
-    <h2>{{ section.settings.title }}</h2>
-    <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_text }}</a>
-  </div>
-  <div class="video-wrapper">
-    {% if section.settings.video_type == 'youtube' %}
-      {% assign video_id = section.settings.youtube_video_url | split: 'v=' | last %}
-      {% if video_id contains '&' %}
-        {% assign video_id = video_id | split: '&' | first %}
-      {% endif %}
-      {% if section.settings.youtube_video_url contains 'youtu.be' %}
-        {% assign video_id = section.settings.youtube_video_url | split: '/' | last | split: '?' | first %}
-      {% endif %}
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    {% else %}
-      <img src="{{ section.settings.video_thumbnail | img_url: 'master' }}" alt="Video Thumbnail">
-      <a href="{{ section.settings.video_link }}" class="video-play-button">
-        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      </a>
-    {% endif %}
+<div class="video-text-section">
+  <div class="page-width">
+    <div class="image-video-section">
+      <div class="video-text-content">
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.side-description }}</p>
+        <span class="reviews_block reviews_block-desk">
+          <div class="reviews-img-block">
+            {% if section.settings.side-rev-img != null %}
+              {% for i in (1..section.settings.image_repeat_count) %}
+                <img src="{{ section.settings.side-rev-img | img_url:'master' }}" alt="Image {{ i }}">
+              {% endfor %}
+            {% endif %}
+          </div>
+          <p>{{ section.settings.rev_text }}</p>
+        </span>
+        <a href="{{ section.settings.button_link }}" class="btn">{{ section.settings.button_text }}</a>
+      </div>
+      <div class="video-wrapper">
+        {% if section.settings.video_type == 'youtube' %}
+          {% assign video_id = section.settings.youtube_video_url | split: 'v=' | last %}
+          {% if video_id contains '&' %}
+            {% assign video_id = video_id | split: '&' | first %}
+          {% endif %}
+          {% if section.settings.youtube_video_url contains 'youtu.be' %}
+            {% assign video_id = section.settings.youtube_video_url | split: '/' | last | split: '?' | first %}
+          {% endif %}
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&loop=1&playlist={{ video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% else %}
+          <video id="customVideo" width="560" height="315" controls autoplay loop muted poster="{{ section.settings.video_thumbnail | img_url: 'master' }}">
+            <source src="{{ section.settings.video_link }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        {% endif %}
+
+        <span class="reviews_block reviews_block-mobile">
+          <div class="reviews-img-block">
+            {% if section.settings.side-rev-img != null %}
+              {% for i in (1..section.settings.image_repeat_count) %}
+                <img src="{{ section.settings.side-rev-img | img_url:'master' }}" alt="Image {{ i }}">
+              {% endfor %}
+            {% endif %}
+          </div>
+          <p>{{ section.settings.rev_text }}</p>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
-</div>
+
 <style>
 .image-video-section {
   display: flex;
   justify-content: space-between;
-  align-items: center;;
+  align-items: center;
 }
-
+.video-text-section {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
 .video-text-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 50%;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 50%;
+  width: 50%;
 }
-
 .video-text-content h2 {
-font-size: 40px;
-    line-height: 50px;
-  font-weight:700;
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: 700;
   margin-bottom: 10px;
 }
-
 .video-text-content .btn {
   background-color: #76e1a6;
-      width: fit-content;
-    font-size: 14px;
-    line-height: 25px;
-    color: #000;
-    padding: 5px 15px;
-    border-radius: 10px;
+  width: fit-content;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000;
+  padding: 5px 15px;
+  border-radius: 10px;
   text-decoration: none;
 }
-
-.video-wrapper {
-    position: relative;
-    max-width: 50%;
-    width: 50%;
+.reviews-img-block img {
+  width: 15px !important;
 }
-
-.video-wrapper img {
+span.reviews_block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.video-wrapper {
+  position: relative;
+  max-width: 50%;
+  width: 30%;
+}
+.video-wrapper img,
+.video-wrapper video {
   width: 100%;
   border-radius: 10px;
 }
-
 .video-play-button {
   position: absolute;
   top: 50%;
@@ -80,24 +112,43 @@ font-size: 40px;
   color: #fff;
   text-decoration: none;
 }
-
-.video-wrapper iframe {
+.video-wrapper iframe,
+.video-wrapper video {
   width: 100%;
   border-radius: 10px;
 }
-  @media(max-width:767px){
-    .image-video-section {
-    flex-direction: column-reverse;
-}
-    .video-text-content {
+    .reviews_block-mobile {
+    display:none !important;
+  }
+@media(max-width:767px) {
+  .image-video-section {
+    flex-direction: column;
+  }
+  .video-text-content {
     max-width: 100%;
     width: auto;
-}
-    .video-wrapper {
+  }
+  .video-wrapper {
     max-width: 100%;
     width: 100%;
-}
   }
+  .video-text-content .btn {
+    font-size: 16px;
+  }
+  .reviews_block-desk {
+    display:none !important;
+  }
+  .reviews_block-mobile {
+    display:flex !important;
+            justify-content: center;
+  }
+  .video-text-content h2 {
+    text-align: center;
+}
+  .video-text-content p {
+    text-align: center;
+}
+}
 </style>
 
 {% schema %}
@@ -108,7 +159,32 @@ font-size: 40px;
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Filterbaby 2.0"
+      "default": "Pourquoi choisir Cup ?"
+    },
+    {
+      "type": "richtext",
+      "id": "side-description",
+      "default": "<p>Nous voulons simplifier la vie intime des femmes en rendant les protections hygiéniques saines, confortables et écologiques accessibles au plus grand nombre.</p>",
+      "label": "Side Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "side-rev-img",
+      "label": "Reviews Image"
+    },
+    {
+      "type": "range",
+      "id": "image_repeat_count",
+      "label": "Number of stars",
+      "min": 1,
+      "max": 5,
+      "default": 1
+    },
+    {
+      "type": "inline_richtext",
+      "id": "rev_text",
+      "default": "+300.000 clientes satisfates depuis 2017",
+      "label": "Reviews text"
     },
     {
       "type": "url",
@@ -129,7 +205,7 @@ font-size: 40px;
       "options": [
         {
           "value": "thumbnail",
-          "label": "Thumbnail with Link"
+          "label": "Custom Video"
         },
         {
           "value": "youtube",
@@ -140,8 +216,7 @@ font-size: 40px;
     {
       "type": "url",
       "id": "youtube_video_url",
-      "label": "YouTube Video URL",
-      "info": "Enter the full YouTube video URL, e.g., 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' or 'https://youtu.be/dQw4w9WgXcQ'"
+      "label": "YouTube Video URL"
     },
     {
       "type": "url",
@@ -154,6 +229,26 @@ font-size: 40px;
       "id": "video_thumbnail",
       "label": "Video Thumbnail",
       "info": "Used only if 'Thumbnail with Link' is selected"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
     }
   ],
   "presets": [
@@ -163,3 +258,4 @@ font-size: 40px;
   ]
 }
 {% endschema %}
+
