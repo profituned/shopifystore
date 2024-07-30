@@ -1,0 +1,52 @@
+<style>
+body:hover .cursor-wrapper {opacity:1.0;}
+.cursor-wrapper {pointer-events: none;}
+</style>
+
+
+
+
+<script>
+// .cursor 
+  $('a').mouseenter(function() {
+  $('.cursor-wrapper').click();
+});
+$('a').mouseleave(function() {
+  $('.cursor-wrapper').click();
+});
+</script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function cycleContent(container) {
+        let elements = container.querySelectorAll('.content');
+        let currentIndex = 0;
+
+        container.addEventListener('mouseenter', function() {
+            // Hide the current element
+            elements[currentIndex].style.display = 'none';
+            
+            // Update the index to point to the next element
+            currentIndex = (currentIndex + 1) % elements.length;
+            
+            // Show the next element
+            elements[currentIndex].style.display = 'block';
+        });
+
+        // Initialize display: only show the first element
+        for (let i = 1; i < elements.length; i++) {
+            elements[i].style.display = 'none';
+        }
+    }
+
+    // Get containers
+    const container1 = document.getElementById('container1');
+    const container2 = document.getElementById('container2');
+
+    // Apply cycling effect
+    cycleContent(container1);
+    cycleContent(container2);
+});
+</script>
