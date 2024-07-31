@@ -1,0 +1,61 @@
+<!--Accordions Using Blocks Made by Sam -->
+
+{%- when 'cus_sm_accordions' -%}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<style>
+  .sm-accord-main button.sm-accord-button {
+    padding: 16px;
+    background: #EEFFFC;
+  }
+
+  .sm-accord-main button.sm-accord-button {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    color: #2F4F4F;
+  }
+
+  .sm-accord-main .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+    transition: all 0.5s;
+    background-size: 20px;
+    background-position: center center;
+  }
+
+  .sm-accord-main .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+  }
+
+  .sm-accord-main .accordion-body p {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6C8B8A;
+  }
+</style>
+
+
+<div class="accordion sm-accord-main" id="accordionExample">
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading">
+      <button class="accordion-button sm-accord-button {% unless forloop.first %}collapsed{% endunless %}" type="button"
+        data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}"
+        aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+        aria-controls="collapse{{ forloop.index }}">
+        {{ block.settings.accord_header }}
+      </button>
+    </h2>
+    <div id="collapse{{ forloop.index }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+      aria-labelledby="heading{{ forloop.index }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        {{ block.settings.accord_body }}
+      </div>
+    </div>
+  </div>
+</div>
