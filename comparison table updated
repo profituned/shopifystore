@@ -1,0 +1,169 @@
+{% comment %} https://tinyurl.com/2d4n5oxv {% endcomment %}
+<style>
+.comparison-section {
+  background-color: #f8e8b3;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.comparison-section h2 {
+  font-size: 24px;
+  line-height:32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.comparison-table {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.comparison-column {
+  background-color: transparent;
+  padding: 20px 0;
+  max-width: 35%;
+  flex: 1;
+  text-align: left;
+}
+  .comparison-column.optim-cards {
+    background-color: #f45a00;
+    border-radius: 20px;
+}
+
+.comparison-column h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin:0px;
+  text-align: center;
+}
+
+.comparison-row {
+  border-top: 1px solid #000;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.comparison-row span {
+  display: block;
+  color:#000;
+  font-size: 16px;
+}
+  .optim-cards .comparison-row span {
+    font-weight: 600;
+}
+.comparison-column-head {
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.optim-logo {
+  text-align: center;
+}
+
+.optim-logo img {
+  max-height: 40px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
+
+
+  @media(max-width:767px){
+    .comparison-column {
+    max-width: 100%;
+}
+    .comparison-row span {
+    font-size: 12px;
+    line-height: 22px;
+}
+    .comparison-row {
+    display: flex;
+      justify-content: center;
+    min-height: 70px;
+}
+  }
+</style>
+
+
+
+<div class="comparison-section">
+  <h2>{{ section.settings.title }}</h2>
+  <div class="comparison-table">
+    <div class="comparison-column other">
+    <div class="comparison-column-head">
+      <h3>{{ section.settings.other_title }}</h3>
+    </div>
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          <span>{{ block.settings.other_text }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="comparison-column optim-cards">
+      {% if section.settings.optim_img != blank %}
+        <div class="optim-logo comparison-column-head">
+          <img src="{{ section.settings.optim_img | img_url:'master' }}" alt="OPTIM CARDS">
+        </div>
+      {% else %}
+        <h3>OPTIM CARDS</h3>
+      {% endif %}
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          <span>{{ block.settings.optim_text }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "BEFORE OPTIM CARDS VS. AFTER OPTIM CARDS"
+    },
+    {
+      "type": "text",
+      "id": "other_title",
+      "label": "Title for 'Other' Column",
+      "default": "Other"
+    },
+    {
+      "type": "image_picker",
+      "id": "optim_img",
+      "label": "Optim Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "other_text",
+          "label": "Other Text"
+        },
+        {
+          "type": "text",
+          "id": "optim_text",
+          "label": "OPTIM CARDS Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
