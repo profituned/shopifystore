@@ -1,0 +1,364 @@
+  /*
+BrandWav
+https://brandwav.com/?_ab=0&_fd=0&_sc=1&key=6451c0732a28cc99d3968a859f41652cc015602fe0e6d2036fb5e400f02f8d5c&preview_theme_id=138074915001
+ */
+
+<style>
+    .BW-collection-list-sub {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+    .BW-collection-list-left {
+      width: 50%;
+  }
+    .BW-collection-list-right {
+      width: 50%;
+  }
+    /* .BW-collection-list-img {
+      width: 100%;
+      height: 100%;
+  } */
+    .BW-collection-list-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: pointer;
+  }
+    .BW-collection-list-leftsub {
+      position: relative;
+  }
+
+    /* Initial state of the overlay boxes */
+  .BW-collection-list-lftbox, .BW-collection-list-rightbox {
+      width: 100%;
+      position: absolute;
+      bottom: 8px;
+      left: 10%;
+      transform: translate(-10%, 0%);
+      background-color: rgba(0, 0, 0, 0.3); /* Light black overlay with 50% opacity */
+      padding: 30px;
+      height: 99%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      opacity: 0; /* Start as invisible */
+      transition: opacity 0.3s ease-in-out; /* Smooth transition for the opacity */
+      pointer-events: none; /* Avoid blocking hover on underlying elements */
+  }
+
+  /* Hover state for the parent divs to show the overlay */
+  .BW-collection-list-left:hover .BW-collection-list-lftbox,
+  .BW-collection-list-right:hover .BW-collection-list-rightbox {
+      opacity: 1; /* Make the overlay visible when parent is hovered */
+      pointer-events: all; /* Allow interactions with the overlay */
+  }
+
+    .BW-collection-list-rightsub {
+      position: relative;
+  }
+
+    .BW-collection-list-lftbox h2 {
+      margin: 0px;
+      font-size: 42px;
+      line-height: 100%;
+      margin-bottom: 10px;
+      font-family: "Arima", system-ui;
+      font-weight: 900;
+      font-style: normal;
+  }
+    .BW-collection-list-rightbox h2 {
+      margin: 0px;
+      font-size: 42px;
+      line-height: 100%;
+      margin-bottom: 10px;
+      font-family: "Arima", system-ui;
+      font-weight: 900;
+      font-style: normal;
+  }
+    .BW-collection-list-lftbox a {
+      color: #008080;
+      text-decoration: none;
+      background: #fff;
+      padding: 12px 20px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+  }
+    .BW-collection-list-rightbox a {
+      color: #008080;
+      text-decoration: none;
+      background: #fff;
+      padding: 12px 20px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+  }
+
+      .BW-collection-list-slider-mob {
+        display: none;
+      }
+
+
+    @media screen and (max-width: 600px) {
+      .BW-collection-list-desk {
+        display: none;
+      }
+
+      .BW-collection-list-slider-mob {
+        display: block;
+      }
+      .BW-collection-list-lftbox h2 {
+      color: #fff;
+  }
+      .BW-collection-list-rightbox h2 {
+      color: #fff;
+  }
+      .BW-collection-list-slider-mob {
+      padding-bottom: 40px;
+  }
+      .BW-collection-list-lftbox h2 {
+      font-size: 24px;
+  }
+      .BW-collection-list-rightbox h2 {
+      font-size: 24px;
+  }
+      .BW-collection-list-lftbox a {
+      width: 100px;
+      padding: 8px 12px;
+      font-size: 16px;
+  }
+      .BW-collection-list-rightbox a {
+      width: 100px;
+      padding: 8px 12px;
+      font-size: 16px;
+  }
+      .BW-collection-list-slider-mob .splide__pagination__page.is-active {
+      background: #008080;
+      opacity: 1;
+  }
+      .BW-collection-list-slider-mob .splide__pagination__page {
+      opacity: 0.5;
+  }
+      .BW-collection-list-lftbox-mob {
+        opacity: 1 !important;
+      }
+      .BW-collection-list-rightbox-mob {
+        opacity: 1 !important;
+      }
+  }
+</style>
+
+<div
+  class="BW-collection-list-main BW-collection-list-desk"
+  style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;"
+>
+  <div class="BW-collection-list-sub">
+    <div class="BW-collection-list-left">
+      <div class="BW-collection-list-leftsub">
+        {% if section.settings.image_left != blank %}
+          <div class="BW-collection-list-img">
+            {{ section.settings.image_left | image_url: width: 1500 | image_tag }}
+          </div>
+        {% else %}
+
+        {% endif %}
+        <div class="BW-collection-list-lftbox">
+          <h2 style="color: {{ section.settings.left_title_color }};">{{ section.settings.coll_title_left }}</h2>
+          {% if section.settings.left_button_url != blank %}
+            <a href="{{ section.settings.left_button_url }}" class="BW-collection-button">
+              {{- section.settings.left_button_text -}}
+            </a>
+          {% else %}
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="BW-collection-list-right">
+      <div class="BW-collection-list-rightsub">
+        {% if section.settings.image_left != blank %}
+          <div class="BW-collection-list-img">
+            {{ section.settings.image_right | image_url: width: 1500 | image_tag }}
+          </div>
+        {% else %}
+
+        {% endif %}
+        <div class="BW-collection-list-rightbox">
+          <h2 style="color: {{ section.settings.right_title_color }};">{{ section.settings.coll_title_right }}</h2>
+          {% if section.settings.right_button_url != blank %}
+            <a href="{{ section.settings.right_button_url }}" class="BW-collection-button">
+              {{- section.settings.right_button_text -}}
+            </a>
+          {% else %}
+
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Slider Layout (Splide) -->
+<div class="BW-collection-list-slider-mob splide unique-splide5">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <!-- Left Slide -->
+      <li class="splide__slide">
+        {% if section.settings.image_left != blank %}
+          <div class="BW-collection-list-img">
+            {{ section.settings.image_left | image_url: width: 1500 | image_tag }}
+          </div>
+        {% else %}
+
+        {% endif %}
+        <div class="BW-collection-list-lftbox BW-collection-list-lftbox-mob">
+          <h2>{{ section.settings.coll_title_left }}</h2>
+          {% if section.settings.left_button_url != blank %}
+            <a href="{{ section.settings.left_button_url }}">{{ section.settings.left_button_text }}</a>
+          {% endif %}
+        </div>
+      </li>
+      <!-- Right Slide -->
+      <li class="splide__slide">
+        {% if section.settings.image_left != blank %}
+          <div class="BW-collection-list-img">
+            {{ section.settings.image_right | image_url: width: 1500 | image_tag }}
+          </div>
+        {% else %}
+
+        {% endif %}
+        <div class="BW-collection-list-rightbox BW-collection-list-rightbox-mob">
+          <h2>{{ section.settings.coll_title_right }}</h2>
+          {% if section.settings.right_button_url != blank %}
+            <a href="{{ section.settings.right_button_url }}">{{ section.settings.right_button_text }}</a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var splide5 = new Splide('.unique-splide5', {
+          type: 'loop',
+          gap: '10px',
+          arrows: false,
+          pagination: false,
+          focus: 'center',
+          autoplay: true, // Enable autoplay
+          interval: 6000, // Set the interval in milliseconds
+          breakpoints: {
+              600: {
+                  perPage: {{ section.settings.mobile_columns }},
+                  pagination: true,
+              }
+          }
+      });
+      splide5.mount();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "BW Collection List",
+  "settings": [
+    {
+  "type": "image_picker",
+  "id": "image_left",
+  "label": "Collection Image Left"
+    },
+    {
+  "type": "text",
+  "id": "coll_title_left",
+  "label": "Collection Title Left"
+  },
+    {
+  "type": "color",
+  "id": "left_title_color",
+  "label": "Left Title Color",
+  "default": "#000000"
+},
+    {
+      "type": "url",
+      "id": "left_button_url",
+      "label": "Left Button URL"
+    },
+    {
+      "type": "text",
+      "id": "left_button_text",
+      "label": "Left Button Text"
+    },
+    {
+  "type": "image_picker",
+  "id": "image_right",
+  "label": "Collection Image Right"
+    },
+    {
+  "type": "text",
+  "id": "coll_title_right",
+  "label": "Collection Title Right"
+  },
+    {
+  "type": "color",
+  "id": "right_title_color",
+  "label": "Right Title Color",
+  "default": "#000000"
+},
+    {
+      "type": "url",
+      "id": "right_button_url",
+      "label": "Right Button URL"
+    },
+    {
+      "type": "text",
+      "id": "right_button_text",
+      "label": "Right Button Text"
+    },
+    {
+      "type": "range",
+      "id": "mobile_columns",
+      "label": "Number of Products on Mobile",
+      "min": 1,
+      "max": 3,
+      "default": 1,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "BW Collection List",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}
