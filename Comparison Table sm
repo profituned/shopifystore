@@ -1,0 +1,269 @@
+{% comment %} chrome-extension://nlipoenfbbikpbjkfpfillcgkoblgpmj/edit-react.html
+Made by Sam {% endcomment %}
+
+<style>
+  .ct-comparison {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+  .ct-comparison-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ct-left {
+    padding: 2rem 0;
+}
+
+.ct-left {
+    flex: 1;
+    flex-basis: 50%;
+}
+
+  .ct-right {
+    flex: 1;
+    flex-basis: 50%;
+}
+
+.ct-table-wrap {
+    padding: 2rem;
+}
+
+.ct-table {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    border-radius: .4rem;
+    border-collapse: collapse;
+    box-shadow: 0 30px 60px -30px #00000059;
+}
+
+.ct-head {
+    position: relative;
+}
+
+.ct-table-wrap tr td:nth-child(2), .ct-table-wrap thead th:nth-child(2) {
+    position: relative;
+    border-left: 2px solid #d62d55;
+    border-right: 2px solid #d62d55;
+    background-color: #fff;
+}
+
+.ct-table th {
+    padding: .5rem 2rem;
+    color: #d62d55;
+}
+
+.ct-table thead th:nth-child(2):before {
+    content: "";
+    position: absolute;
+    height: .75rem;
+    top: -.75rem;
+    right: -2px;
+    left: -2px;
+    background-color: #fff;
+    border-left: 2px solid #d62d55;
+    border-right: 2px solid #d62d55;
+    border-top-left-radius: .4rem;
+    border-top-right-radius: .4rem;
+    border-top: 2px solid #d62d55;
+}
+
+  .ct-table-wrap thead th:nth-child(2), .ct-table-wrap tr:last-child td:nth-child(2) {
+    position: relative;
+}
+
+  .ct-table-wrap tr:last-child td:nth-child(2):after {
+    content: "";
+    position: absolute;
+    height: .75rem;
+    bottom: -.75rem;
+    right: -2px;
+    left: -2px;
+    background-color: #fff;
+    border-left: 2px solid #d62d55;
+    border-right: 2px solid #d62d55;
+    border-bottom-right-radius: .4rem;
+    border-bottom-left-radius: .4rem;
+    border-bottom: 2px solid #d62d55;
+}
+
+.ct-table img {
+    max-width: 50px;
+    margin: 0 auto;
+    height: auto;
+}
+
+.ct-green-check svg {
+    fill: #50bd0b;
+    margin: 0 auto;
+    width: 25px;
+    height: 25px;
+}
+
+.ct-red-cross svg {
+    fill: #939393;
+    margin: 0 auto;
+    width: 25px;
+    height: 25px;
+}
+
+.ct-table td {
+    padding: 1rem 2rem;
+}
+
+.ct-left-txt {
+    text-align: center;
+}
+
+  @media screen and (max-width: 768px) {
+  .ct-comparison-wrapper {
+    flex-direction: column;
+}
+    .ct-left {
+    flex-basis: 100%;
+}
+
+  .ct-right {
+    flex-basis: 100%;
+}
+}
+  
+</style>
+
+<div class="ct-section ct-comparison">
+    <div class="container">
+      <div class="ct-comparison-wrapper">
+        <div class="ct-left">
+          <div class="ct-left-txt">
+            <h2 class="ct-title">{{ section.settings.title }}</h2>
+            <p class="ct-description">
+              <span class="ct-vs-text">{{ section.settings.subtitle }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="ct-right">
+          <div class="ct-table-wrap">
+            <table class="ct-table">
+              <thead class="ct-head">
+                <tr>
+                  <th></th>
+                  <th>
+                    {% if section.settings.logo != blank %}
+                    {{ section.settings.logo | image_url: width: 1500 | image_tag }}
+                    {% else %} {% endif %}
+                  </th>
+                  <th>{{ section.settings.comparator_name }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in section.blocks %}
+                  <tr>
+                    <td>{{ row.settings.feature_name }}</td>
+                    <td>
+                      {% if row.settings.our_product == true %}
+                      <div class="ct-green-check">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                        </svg>
+                      </div>
+                        {% else %}
+                      <div class="ct-red-cross">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+                        </svg>
+                      </div>
+                      {% endif %}
+                    </td>
+                    <td>
+                  {% if row.settings.competitor == true %}
+                      <div class="ct-green-check">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                        </svg>
+                      </div>
+                        {% else %}
+                      <div class="ct-red-cross">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"></path>
+                        </svg>
+                      </div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Curved Paddle Brush"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "vs. andre hårbørster"
+    },
+    {
+  "type": "image_picker",
+  "id": "logo",
+  "label": "Our Logo Image"
+},
+    {
+      "type": "text",
+      "id": "comparator_name",
+      "label": "Comparator Name",
+      "default": "andre"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "features",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name",
+          "default": "Feature"
+        },
+        {
+          "type": "checkbox",
+          "id": "our_product",
+          "label": "Our Product Has This Feature",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "competitor",
+          "label": "Competitor Has This Feature",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
