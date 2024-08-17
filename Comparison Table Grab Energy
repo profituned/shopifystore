@@ -1,0 +1,411 @@
+{% comment %} https://tinyurl.com/27ujxmrr {% endcomment %}
+<style>
+      @media(min-width:1000px) {
+        .comparison-table {
+          max-width: 85%;
+          margin: 0 auto;
+      }
+      }
+
+    .comparison-table * {
+     font-family: Berthhold;
+    }
+                              .comparison-section {
+                                background-color: #f8e8b3;
+                                padding: 40px 20px;
+                                text-align: center;
+                              }
+
+                            .comparison-section h2 {
+                                font-size: 4rem;
+                                line-height: 1.2;
+                                font-weight: bold;
+                                margin-bottom: 2rem;
+                            }
+                              .comparison-table {
+                                display: flex;
+                                justify-content: center;
+                                align-items: flex-start;
+                              }
+
+                              .comparison-column {
+                                background-color: transparent;
+                                padding: 20px 0;
+                                max-width: 20%;
+                                flex: 1;
+                                text-align: left;
+                              }
+
+                              .comparison-column.optim-cards,
+                              .comparison-column.column-2,
+                              .comparison-column.column-3,
+                              .comparison-column.column-4 {
+                                border-radius: 20px;
+                              }
+                              .comparison-column.optim-cards {
+                                    background-color: #D7E9E0;
+                              }
+
+                              .comparison-column h3 {
+                                font-size: 20px;
+                                font-weight: bold;
+                                margin: 0px;
+                                text-align: center;
+                              }
+
+          .comparison-row {
+              background-color: #F2F2DF;
+              padding: 10px 0;
+              text-align: center;
+              min-height: 4.5rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
+              .comparison-table .comparison-column:first-child .comparison-row {
+                  border-bottom-left-radius: 2rem;
+                  border-top-left-radius: 2rem;
+              }
+                .comparison-table .comparison-column:last-child .comparison-row {
+                  border-bottom-right-radius: 2rem;
+                  border-top-right-radius: 2rem;
+              }
+              .comparison-row:nth-child(even) {
+                background-color: transparent;
+            }
+                                .comparison-column.optim-cards .comparison-row {
+                                    border-color: transparent;
+                                  background-color: #D7E9E0;
+                              }
+
+  .comparison-row span {
+      display: block;
+      color: #000;
+      font-size: 1.1rem;
+  }
+        .comparison-table .comparison-column:first-child span {
+            font-size: 1.3rem;
+        }
+                          .comparison-row img {
+                              max-height: 18px;
+                              max-width: 100%;
+                              width: auto;
+                              height: auto;
+                              display: inline-block;
+                          }
+
+                              .optim-cards .comparison-row span,
+                              .column-2 .comparison-row span,
+                              .column-3 .comparison-row span,
+                              .column-4 .comparison-row span {
+                                font-weight: 600;
+                              }
+
+                              .comparison-column-head {
+                                min-height: 50px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                              }
+
+                              .optim-logo img,
+                              .column-2-logo img,
+                              .column-3-logo img,
+                              .column-4-logo img {
+                                max-height: 40px;
+                                max-width: 100%;
+                                width: auto;
+                                height: auto;
+                                display: inline-block;
+                              }
+
+
+
+      @media (max-width: 767px) {
+                                .comparison-column {
+                                  max-width: 100%;
+                                }
+                      .comparison-section h2 {
+                          font-size: 2rem;
+                      }
+                        .comparison-row span {
+                            font-size: 10px;
+                            line-height: 22px;
+                        }
+                  .comparison-column img {
+                      max-height: 25px;
+                  }
+                    .comparison-row {
+                        min-height: 70px;
+                    }
+                              }
+</style>
+
+<div class="comparison-section">
+  <h2>{{ section.settings.title }}</h2>
+  <div class="comparison-table">
+    <div class="comparison-column other">
+      <div class="comparison-column-head">
+        <h3>{{ section.settings.other_title }}</h3>
+      </div>
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          {% if block.settings.other_display_type == 'text' %}
+            <span>{{ block.settings.other_text }}</span>
+          {% else %}
+            <img src="{{ block.settings.other_image | img_url: 'master' }}" alt="Other Image">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="comparison-column optim-cards">
+      {% if section.settings.ge_img != blank %}
+        <div class="optim-logo comparison-column-head">
+          <img src="{{ section.settings.ge_img | img_url:'master' }}" alt="GE">
+        </div>
+      {% else %}
+        <h3>GE Energy</h3>
+      {% endif %}
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          {% if block.settings.optim_display_type == 'text' %}
+            <span>{{ block.settings.optim_text }}</span>
+          {% else %}
+            <img src="{{ block.settings.optim_image | img_url: 'master' }}" alt="Optim Image">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="comparison-column column-2">
+      <div class="column-2-logo comparison-column-head">
+        <img src="{{ section.settings.column_2_img | img_url:'master' }}" alt="Column 2">
+      </div>
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          {% if block.settings.column_2_display_type == 'text' %}
+            <span>{{ block.settings.column_2_text }}</span>
+          {% else %}
+            <img src="{{ block.settings.column_2_image | img_url: 'master' }}" alt="Column 2 Image">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="comparison-column column-3">
+      <div class="column-3-logo comparison-column-head">
+        <img src="{{ section.settings.column_3_img | img_url:'master' }}" alt="Column 3">
+      </div>
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          {% if block.settings.column_3_display_type == 'text' %}
+            <span>{{ block.settings.column_3_text }}</span>
+          {% else %}
+            <img src="{{ block.settings.column_3_image | img_url: 'master' }}" alt="Column 3 Image">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="comparison-column column-4">
+      <div class="column-4-logo comparison-column-head">
+        <img src="{{ section.settings.column_4_img | img_url:'master' }}" alt="Column 4">
+      </div>
+      {% for block in section.blocks %}
+        <div class="comparison-row">
+          {% if block.settings.column_4_display_type == 'text' %}
+            <span>{{ block.settings.column_4_text }}</span>
+          {% else %}
+            <img src="{{ block.settings.column_4_image | img_url: 'master' }}" alt="Column 4 Image">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "BEFORE OPTIM CARDS VS. AFTER OPTIM CARDS"
+    },
+    {
+      "type": "text",
+      "id": "other_title",
+      "label": "Title for 'Other' Column",
+      "default": "Other"
+    },
+    {
+      "type": "image_picker",
+      "id": "ge_img",
+      "label": "GE Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_2_img",
+      "label": "Column 2 Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_3_img",
+      "label": "Column 3 Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "column_4_img",
+      "label": "Column 4 Logo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "other_display_type",
+          "label": "Other Display Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "other_text",
+          "label": "Other Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "other_image",
+          "label": "Other Image"
+        },
+        {
+          "type": "select",
+          "id": "optim_display_type",
+          "label": "GE Display Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "optim_text",
+          "label": "GE Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "optim_image",
+          "label": "GE Image"
+        },
+        {
+          "type": "select",
+          "id": "column_2_display_type",
+          "label": "Column 2 Display Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "column_2_text",
+          "label": "Column 2 Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "column_2_image",
+          "label": "Column 2 Image"
+        },
+        {
+          "type": "select",
+          "id": "column_3_display_type",
+          "label": "Column 3 Display Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "column_3_text",
+          "label": "Column 3 Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "column_3_image",
+          "label": "Column 3 Image"
+        },
+        {
+          "type": "select",
+          "id": "column_4_display_type",
+          "label": "Column 4 Display Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "image",
+              "label": "Image"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "column_4_text",
+          "label": "Column 4 Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "column_4_image",
+          "label": "Column 4 Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
