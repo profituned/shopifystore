@@ -1,0 +1,275 @@
+
+<div class="container spacing-layout">
+  <div class="table-heading">
+    {% if section.settings.heading != blank %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% endif %}
+  </div>
+ <div class="comparison-table-container" style="background-color: {{section.settings.container_bg}};">
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="highlight">
+                  {% if section.settings.paws_image != blank %}
+                  {{ section.settings.paws_image | image_url: width: 1500 | image_tag }}
+                {% else %} {% endif %}
+                </th>
+                <th>{{ section.settings.comp_txt }}</th>
+            </tr>
+        </thead>
+        <tbody
+          {% for block in section.blocks %}
+            <tr>
+                <td class="first-cell">{{ block.settings.feature_name }}</td>
+              {% if block.settings.puppiko_paws %}
+                <td class="check highlight"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.3271 9.45498C18.5384 9.25381 18.8196 9.1426 19.1113 9.14481C19.403 9.14702 19.6825 9.26247 19.8907 9.46681C20.099 9.67115 20.2197 9.9484 20.2274 10.24C20.2351 10.5317 20.1292 10.8149 19.9321 11.03L13.9471 18.515C13.8441 18.6258 13.7199 18.7148 13.5819 18.7765C13.4438 18.8383 13.2947 18.8715 13.1434 18.8743C12.9922 18.8771 12.842 18.8494 12.7017 18.7928C12.5614 18.7362 12.434 18.6519 12.3271 18.545L8.35806 14.576C8.24753 14.473 8.15888 14.3488 8.09739 14.2108C8.0359 14.0728 8.00284 13.9238 8.00018 13.7728C7.99751 13.6217 8.0253 13.4717 8.08188 13.3316C8.13846 13.1915 8.22268 13.0643 8.32951 12.9574C8.43633 12.8506 8.56358 12.7664 8.70367 12.7098C8.84375 12.6532 8.99379 12.6254 9.14485 12.6281C9.2959 12.6308 9.44487 12.6638 9.58287 12.7253C9.72087 12.7868 9.84507 12.8754 9.94806 12.986L13.0891 16.1255L18.2986 9.48798C18.3079 9.47643 18.3165 9.46541 18.3271 9.45498Z" fill="currentColor"></path>
+    <path d="M27 14C27 21.1797 21.1797 27 14 27C6.8203 27 1 21.1797 1 14C1 6.8203 6.8203 1 14 1C21.1797 1 27 6.8203 27 14Z" stroke="currentColor" stroke-width="2"></path>
+  </svg></td>
+              {% else %}
+                <td class="check highlight"><svg width="28" height="28" viewBox="0 0 28 28" fill="#00000038" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9.5 9.5L18.5 18.5M9.5 18.5L18.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M27 14C27 21.1797 21.1797 27 14 27C6.8203 27 1 21.1797 1 14C1 6.8203 6.8203 1 14 1C21.1797 1 27 6.8203 27 14Z" stroke="currentColor" stroke-width="2"></path>
+  </svg></td>
+              {% endif %}
+              {% if block.settings.competitors %}
+                <td class="check"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.3271 9.45498C18.5384 9.25381 18.8196 9.1426 19.1113 9.14481C19.403 9.14702 19.6825 9.26247 19.8907 9.46681C20.099 9.67115 20.2197 9.9484 20.2274 10.24C20.2351 10.5317 20.1292 10.8149 19.9321 11.03L13.9471 18.515C13.8441 18.6258 13.7199 18.7148 13.5819 18.7765C13.4438 18.8383 13.2947 18.8715 13.1434 18.8743C12.9922 18.8771 12.842 18.8494 12.7017 18.7928C12.5614 18.7362 12.434 18.6519 12.3271 18.545L8.35806 14.576C8.24753 14.473 8.15888 14.3488 8.09739 14.2108C8.0359 14.0728 8.00284 13.9238 8.00018 13.7728C7.99751 13.6217 8.0253 13.4717 8.08188 13.3316C8.13846 13.1915 8.22268 13.0643 8.32951 12.9574C8.43633 12.8506 8.56358 12.7664 8.70367 12.7098C8.84375 12.6532 8.99379 12.6254 9.14485 12.6281C9.2959 12.6308 9.44487 12.6638 9.58287 12.7253C9.72087 12.7868 9.84507 12.8754 9.94806 12.986L13.0891 16.1255L18.2986 9.48798C18.3079 9.47643 18.3165 9.46541 18.3271 9.45498Z" fill="currentColor"></path>
+    <path d="M27 14C27 21.1797 21.1797 27 14 27C6.8203 27 1 21.1797 1 14C1 6.8203 6.8203 1 14 1C21.1797 1 27 6.8203 27 14Z" stroke="currentColor" stroke-width="2"></path>
+  </svg></td>
+              {% else %}
+               <td class="cross"><svg width="28" height="28" viewBox="0 0 28 28" fill="#00000038" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9.5 9.5L18.5 18.5M9.5 18.5L18.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M27 14C27 21.1797 21.1797 27 14 27C6.8203 27 1 21.1797 1 14C1 6.8203 6.8203 1 14 1C21.1797 1 27 6.8203 27 14Z" stroke="currentColor" stroke-width="2"></path>
+  </svg></td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+           
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison Table",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let's Puppkio And Compare"
+    },
+    {
+  "type": "image_picker",
+  "id": "paws_image",
+  "label": "Lucky Paws Image"
+    },
+    {
+  "type": "text",
+  "id": "comp_txt",
+  "label": "Competitor Text"
+},
+    {
+      "type": "header",
+      "content": "Container Background Color"
+    },
+    {
+      "type": "color",
+      "id": "container_bg",
+      "label": "Background",
+      "default": "#e3f7fd"
+     
+    }
+
+
+  ],
+  "blocks": [
+    {
+      "type": "comparison",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name",
+          "default": "Feature"
+        },
+        {
+          "type": "checkbox",
+          "id": "puppiko_paws",
+          "label": "Puppiko Paws",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "competitors",
+          "label": "Competitors",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table",
+      "category": "Custom"
+    }
+  ],
+  "max_blocks": 10
+}
+{% endschema %}
+
+
+{% stylesheet %}
+.spacing-layout {
+    padding: 40px 0;
+}
+  .comparison-table th, .comparison-table td {
+   
+    padding: 10px 20px!important;
+  
+}
+td.highlight {
+    background-color: #fff;
+  border-radius:0px!important;
+      /* border-left: 1px solid #000;
+    border-right: 1px solid #000; */
+}
+  th.highlight {
+    background-color: #fff!important;
+    border-radius:0px!important;
+}
+  .table-heading{
+    width: 60%;
+    margin: auto;
+  }
+   .table-heading h2{
+   text-align: center;
+     margin-bottom:30px;
+     font-size:35px;
+     font-weight:800;
+  }
+  td.first-cell {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.comparison-table-container {
+    max-width: 700px;
+    margin: auto;
+    color: #434e50;
+    border-radius: 10px;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.comparison-table th, .comparison-table td {
+    /* border: 1px solid #ddd; */
+    padding: 10px;
+    text-align: center;
+  border-radius:10px;
+}
+
+.comparison-table th {
+    font-weight: bold;
+}
+
+.comparison-table td:first-child {
+    text-align: left;
+}
+ 
+
+.highlight:before {
+    content: "";
+    position: absolute;
+    top: -.9rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 75px;
+    z-index: 1;
+    border-top: 2px solid!important;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+}
+  .highlight {
+    position: relative;
+}
+ 
+td.check.highlight:before {
+    border-top: 0px!important;
+    border-radius: 0!important;
+    border-color: #000 !important;
+}
+
+ tr:last-child td.check.highlight:before {
+    border-bottom: 2px solid #000;
+    border-radius: 0px 0px 12px 12px !important;
+}
+td {
+    border: none;
+}
+  th {
+    border: none;
+}
+  th.highlight {
+    width: 140px;
+    height: 45px; 
+}
+  th.highlight img { 
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+  @media screen and (max-width: 991px) {
+.comparison-table-container {
+  max-width: 100;
+}
+}
+
+   @media screen and (max-width: 600px) {
+.highlight:before {
+    height: 75px;
+}
+     .table-heading h2 {
+    font-size: 26px;
+    line-height: normal;
+}
+    .comparison-table th, .comparison-table td {
+    font-size: 10px; 
+    line-height: normal;
+    padding: 10px!important;
+    min-width: 30%;
+}
+     th.highlight {
+    width: 110px;
+    height: 34px;
+}
+     .comparison-table td:first-child {
+    text-align: left !important;
+}
+    td.first-cell {
+    font-size: 12px; 
+    font-weight: 600;
+}
+     .spacing-layout {
+  padding: 30px 0px;
+}
+}
+
+{% endstylesheet %}
+
+{% javascript %}
+// Add your custom JavaScript here if needed
+{% endjavascript %}
+
