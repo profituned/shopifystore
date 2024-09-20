@@ -1,0 +1,61 @@
+  {%- when 'variation_products' -%}
+             <div class="custom-variations">
+              {% if product.metafields.custom.link_product.value %}
+                  
+                  <legend class="label-text form__label" style="margin-bottom: 10px; display: block;">Product:</legend>
+                  <div class="custom-variation-swatches">
+                     {% assign product_handles = product.metafields.custom.link_product.value  %}
+
+                  {% for variation_product in product_handles %}
+                    
+                    {%- assign variation_swatch_name = variation_product.title | split: " " -%}
+
+                    {% if variation_swatch_name.size > 1 %}
+                      {% assign variation_swatch_tool = variation_swatch_name[0] %}
+                      
+                    {% endif %}
+                    <a href="{{ variation_product.url }}">
+                    <span class="variation-product-image {% if variation_product.title == product.title %} active{% endif %}">
+                    {% if variation_product.title contains 'Sun Catcher Rainbow Making Sticker Sets' %} Sticker Set {% elsif variation_product.title contains 'Sun Catcher Rainbow Making Stickers' %} Single Sticker {% else %}
+                    {{ variation_swatch_tool }}  {% endif %}
+                    </span>
+                    </a>
+                    
+                  {% endfor %}
+                </div>
+              {% endif %}
+             </div> 
+
+
+
+
+Block Schema:
+
+{
+      "type": "variation_products",
+      "name": "Link Products",
+      "limit": 1
+    },
+
+
+Style:
+
+
+.custom-variation-swatches {
+    display: flex;
+    column-gap: 10px;
+    flex-wrap: wrap;
+}
+.custom-variation-swatches a {
+    text-decoration: none;
+}
+span.variation-product-image {
+    border: 1px solid #000000;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    color: #000;
+}
+span.variation-product-image.active {
+    background: #000;
+    color: #fff;
+}
